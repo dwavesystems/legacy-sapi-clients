@@ -1,0 +1,16 @@
+/.idea/
+/env*/
+**/.cache/
+*.pyc
+MANIFEST
+/dist/
+/build/
+/htmlcov/
+*.egg-info
+*,cover
+.coverage
+/debian/build/
+/debian/files
+/debian/sapience.debhelper.log
+/debian/sapience.substvars
+/debian/sapience/

@@ -1,0 +1,7 @@
+{
+  global:
+    sapi*;
+    SAPI*;
+  local:
+    *;
+};

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+export PYTHONPATH=/usr/lib/sapience
+python -m sapience "$@"

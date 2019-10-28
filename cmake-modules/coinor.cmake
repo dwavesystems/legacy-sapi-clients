@@ -1,0 +1,22 @@
+set(COINOR_INCLUDEDIR "" CACHE PATH "COIN-OR include directory")
+set(COINOR_LIBRARYDIR "" CACHE PATH "COIN-OR library directory")
+
+find_path(COINOR_INCLUDE_DIR coin/ClpSimplex.hpp PATHS "${COINOR_INCLUDEDIR}"
+  NO_DEFAULT_PATH)
+find_path(COINOR_INCLUDE_DIR coin/ClpSimplex.hpp PATHS "${COINOR_INCLUDEDIR}")
+
+find_library(COINOR_CLP_LIBRARY Clp libClp
+  PATHS "${COINOR_LIBRARYDIR}" DOC "COIN-OR Clp library" NO_DEFAULT_PATH)
+find_library(COINOR_CLP_LIBRARY Clp libClp)
+
+find_library(COINOR_COINUTILS_LIBRARY CoinUtils libCoinUtils
+  PATHS "${COINOR_LIBRARYDIR}" DOC "COIN-OR CoinUtils library"
+  NO_DEFAULT_PATH)
+find_library(COINOR_COINUTILS_LIBRARY CoinUtils libCoinUtils)
+
+set(COINOR_LIBRARIES "${COINOR_CLP_LIBRARY}" "${COINOR_COINUTILS_LIBRARY}")
+
+if(NOT COINOR_INCLUDE_DIR OR NOT COINOR_CLP_LIBRARY
+    OR NOT COINOR_COINUTILS_LIBRARY)
+  message(SEND_ERROR "COIN-OR development files not found")
+endif()

@@ -1,0 +1,14 @@
+% Copyright © 2019 D-Wave Systems Inc.
+% The software is licensed to authorized users only under the applicable license agreement.  See License.txt.
+
+try
+  addpath '@MATLAB_XUNIT_DIR@'
+  addpath '@CMAKE_CURRENT_SOURCE_DIR@'
+  addpath '@CMAKE_CURRENT_SOURCE_DIR@/..'
+  addpath '@CMAKE_CURRENT_BINARY_DIR@/..'
+  runtests '@CMAKE_CURRENT_SOURCE_DIR@' -xmlfile '@TESTRESULTS_FILE@'
+catch m
+  disp(m)
+end
+
+quit

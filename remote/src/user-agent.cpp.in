@@ -1,0 +1,8 @@
+//Copyright © 2019 D-Wave Systems Inc.
+//The software is licensed to authorized users only under the applicable license agreement.  See License.txt.
+
+namespace sapiremote {
+
+extern char const * const userAgent = "sapi-remote/@SAPI_VERSION@ (@SAPI_CLIENT@ @SAPI_ARCH@)";
+
+} // namespace sapiremote

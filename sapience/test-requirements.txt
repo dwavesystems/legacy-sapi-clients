@@ -1,0 +1,3 @@
+-i http://pypi.dwavesys.local/simple
+pytest
+mock

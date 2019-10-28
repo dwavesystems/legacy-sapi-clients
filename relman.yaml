@@ -1,0 +1,10 @@
+qubist-clients-deb_debian_changelog:
+    type: deb
+    basedir: qubist-clients-deb
+
+sapience_debian_changelog:
+    type: deb
+    basedir: sapience
+
+version.txt:
+    type: oneline

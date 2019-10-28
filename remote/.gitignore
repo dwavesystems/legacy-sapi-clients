@@ -1,0 +1,13 @@
+.project
+.cproject
+/Debug
+.settings
+Build*
+vgsupp
+/Python
+*.m~
+*.asv
+/Matlab
+/MatlabTest
+/AnswerManagerSpammer
+/HttpServiceGrind

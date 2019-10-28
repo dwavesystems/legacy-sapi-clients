@@ -1,0 +1,15 @@
+Source: sapience
+Section: non-free/python
+Priority: extra
+Maintainer: D-Wave Systems Inc. <dwsupport@dwavesys.com>
+Build-Depends: debhelper (>= 8.0.0), python, python-setuptools, swig | swig2.0,
+  cmake, libboost-dev
+Standards-Version: 3.9.3
+X-Python-Version: >= 2.7
+Homepage: http://dwavesys.com
+
+Package: sapience
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: D-Wave remote SAPI solver interface
+  The sapience program provides C4-sized optimization and sampling solvers.

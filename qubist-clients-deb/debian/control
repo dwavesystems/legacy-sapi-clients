@@ -1,0 +1,14 @@
+Source: qubist-clients
+Section: non-free/misc
+Priority: extra
+Maintainer: Marshall Drew-Brook <marshall@dwavesys.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.2
+Homepage: http://dwavesys.com
+
+Package: qubist-clients
+Architecture: all
+Depends: ${misc:Depends}, qubist
+Description: D-Wave SAPI client downloads for Qubist
+ All the pre-built SAPI client libraries for various platforms and languages,
+ available for download through Qubist.

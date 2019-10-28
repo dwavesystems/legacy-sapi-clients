@@ -1,0 +1,35 @@
+#!/usr/bin/make -f
+#export DH_VERBOSE=1
+
+%:
+	dh $@
+
+VERSION := $(shell head -n 1 \
+  $(dir $(lastword $(MAKEFILE_LIST)))/../../version.txt)
+
+LIBDIR = usr/lib/sapience
+
+CMAKE_ARGS = -DCMAKE_BUILD_TYPE=Release -DENABLE_PYTHON=ON
+
+override_dh_auto_configure:
+	-mkdir debian/build
+	cd debian/build && cmake ../../../local-solvers $(CMAKE_ARGS)
+
+override_dh_auto_build:
+	$(MAKE) -C debian/build python-egg
+
+override_dh_auto_install:
+	install -d debian/sapience/$(LIBDIR)
+	find debian/build/lib/python -name 'sapilocal-$(VERSION)-*.egg' -print -quit\
+    | xargs env PYTHONPATH=debian/sapience/$(LIBDIR) easy_install \
+	  --always-copy --no-deps -H localhost --install-dir=debian/sapience/$(LIBDIR)
+	python setup.py install --single-version-externally-managed \
+    --record /dev/null --install-lib debian/sapience/$(LIBDIR)
+	find debian/sapience/$(LIBDIR) -type f -path 'EGGDIR/*' \
+    -exec chmod a+r '{}' \;
+	install -d debian/sapience/usr/bin
+	install -t debian/sapience/usr/bin debian/install-files/sapience
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf debian/build/
