@@ -138,7 +138,7 @@ Class Reference:
 
 
 Problems
-======================
+===============================
 
 Solve an Ising Problem (Synchronous)
 ---------------------------------------
@@ -223,7 +223,7 @@ Class Reference:
 
 
 Solve a QUBO Problem (Asynchronous)
-----------------------------------
+-----------------------------------------
 
 Legacy Python Client
 .........................
@@ -278,7 +278,7 @@ Class Reference:
 <https://docs.ocean.dwavesys.com/projects/cloud-client/en/latest/reference/computation.html#dwave.cloud.computation.Future>`_
 
 Embedding
-=================
+===============================
 
 Find Embedding
 --------------------
@@ -366,7 +366,7 @@ Function Reference:
 <https://docs.ocean.dwavesys.com/projects/system/en/latest/reference/generated/dwave.embedding.unembed_sampleset.html#dwave.embedding.unembed_sampleset>`_
 
 Utilities
-======================
+===============================
 
 Convert Ising to QUBO
 ----------------------------
@@ -620,14 +620,75 @@ Function Reference:
 
 `fix_variables(bqm, sampling_mode=True) <https://docs.ocean.dwavesys.com/projects/dimod/en/latest/reference/bqm/generated/dimod.roof_duality.fix_variables.html?highlight=fix_variables#dimod.roof_duality.fix_variables>`_
 
+Other Tools
+===============================
+
+qbsolv
+-----------------
+
+The ``qbsolv`` utility has for all intents and purposes been replaced with the ``dwave-hybrid`` framework in Ocean
+(it is possible to build a ``qbsolv`` replica with Ocean). Read more about `D-Wave Hybrid <https://docs.ocean.dwavesys.com/projects/hybrid/en/stable/>`_.
+However, `qbsolv <https://docs.ocean.dwavesys.com/projects/qbsolv/en/latest/index.html#qbsolv>`_ has also been made available in Ocean.
+
+Ocean Tools
+.........................
+
+.. code:: python
+
+  from dwave_qbsolv import QBSolv
+  Q = {(0, 0): 1, (1, 1): 1, (0, 1): 1}
+  response = QBSolv().sample_qubo(Q)
+  print("samples=" + str(list(response.samples())))
+  print("energies=" + str(list(response.data_vectors['energy'])))
+
 QSage
-==========
+-----------------
 
 Currently, there is no equivalent QSage functionality in Ocean tool suite.
 This `Leap Community post <https://support.dwavesys.com/hc/en-us/community/posts/360026065734-QSage>`_ discusses the topic.
 
-qbsolv
-=============
+Matlab
+-----------------
 
-The ``qbsolv`` utility has been replaced with the ``dwave-hybrid`` framework in Ocean
-(it is possible to build a ``qbsolv`` replica with Ocean). Read more about `D-Wave Hybrid <https://docs.ocean.dwavesys.com/projects/hybrid/en/stable/>`_.
+Although the Legacy ``Matlab`` Client is no longer available, it is still possible to integrate Matlab with Ocean, using
+the integration between ``Matlab`` and Python.
+
+Ocean Tools
+.........................
+
+Python Example
+
+.. code:: python
+
+  from dwave.system.samplers import DWaveSampler
+  from dwave.system.composites import EmbeddingComposite
+  from dimod import BinaryQuadraticModel
+  from numpy import array, int32
+
+  my_sampler = EmbeddingComposite(DWaveSampler(num_reads=2))
+
+  ndarr = array([[-88, 60, -20],
+                 [120, -58, 20],
+                 [20, -80, 28]], int32)
+
+  bqm = BinaryQuadraticModel.from_numpy_matrix(ndarr)
+
+  sampleset = my_sampler.sample(bqm, num_reads=2)
+
+Matlab Equivalent
+
+.. code:: matlab
+
+  samplers = py.importlib.import_module('dwave.system.samplers')
+  composites = py.importlib.import_module('dwave.system.composites')
+  dimod = py.importlib.import_module('dimod')
+
+  sampler = composites.EmbeddingComposite(samplers.DWaveSampler())
+
+  Q = [-88 60 -20;
+       120 -58 20;
+       20 -80 28];
+
+  bqm = dimod.BQM.from_numpy_matrix(Q)
+
+  sampleset = sampler.sample(bqm, pyargs('num_reads', int32(2)))
