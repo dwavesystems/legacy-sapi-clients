@@ -626,9 +626,8 @@ Other Tools
 qbsolv
 -----------------
 
-The ``qbsolv`` utility has for all intents and purposes been replaced with the ``dwave-hybrid`` framework in Ocean
-(it is possible to build a ``qbsolv`` replica with Ocean). Read more about `D-Wave Hybrid <https://docs.ocean.dwavesys.com/projects/hybrid/en/stable/>`_.
-However, `qbsolv <https://docs.ocean.dwavesys.com/projects/qbsolv/en/latest/index.html#qbsolv>`_ has also been made available in Ocean.
+``qbsolv``'s functionality can be replaced using the more general ``dwave-hybrid`` framework, however `qbsolv <https://docs.ocean.dwavesys.com/projects/qbsolv/en/latest/index.html#qbsolv>`_ itself has also been made available in Ocean.
+Read more about `D-Wave Hybrid <https://docs.ocean.dwavesys.com/projects/hybrid/en/stable/>`_.
 
 Ocean Tools
 .........................
