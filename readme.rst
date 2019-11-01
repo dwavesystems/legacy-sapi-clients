@@ -41,6 +41,7 @@ Instead, a solver can be created simply:
 .. code:: python
 
   from dwave.system.samplers import DWaveSampler
+
   sampler = DWaveSampler(endpoint = url, token = token, proxy = proxy)
 
 Make a Remote Connection
@@ -52,6 +53,7 @@ Legacy Python Client
 .. code:: python
 
   from dwave_sapi2.remote import RemoteConnection
+
   remote_connection = RemoteConnection(url, token)
   remote_connection = RemoteConnection(url, token, proxy_url)
   solver_names = remote_connection.solver_names()
@@ -64,6 +66,7 @@ Ocean Tools
 .. code:: python
 
   from dwave.cloud import Client
+
   client = Client (endpoint = url, token = token)
   client = Client (endpoint = url, token = token, proxy = proxy)
   solver_names = client.get_solvers()
@@ -84,6 +87,7 @@ Legacy Python Client
 .. code:: python
 
   from dwave_sapi2.local import local_connection
+
   solver_names = local_connection.solver_names()
   solver = local_connection.get_solver("name")
 
@@ -93,6 +97,7 @@ Ocean Tools
 .. code:: python
 
   from dwave.cloud import Client
+
   solver_names = client.get_solvers()
   solver = client.get_solver ("name")
 
@@ -113,6 +118,7 @@ Legacy Python Client
 .. code:: python
 
   from dwave_sapi2.remote import RemoteConnection
+
   url = 'system-url'
   token = 'your-api-token'
   conn = RemoteConnection(url, token)
@@ -125,6 +131,7 @@ Ocean Tools
 .. code:: python
 
   from dwave.cloud import Client
+
   url = 'system-url'
   token = 'your-api-token'
   client = Client(endpoint=url, token=token)
@@ -138,7 +145,7 @@ Class Reference:
 
 
 Problems
-======================
+===============================
 
 Solve an Ising Problem (Synchronous)
 ---------------------------------------
@@ -149,6 +156,7 @@ Legacy Python Client
 .. code:: python
 
   from dwave_sapi2.core import solve_ising
+
   answer = solve_ising(solver, h, J)
   answer = solve_ising(solver, h, J, param_name=value, ...)
 
@@ -157,6 +165,8 @@ Ocean Tools
 .........................
 
 .. code:: python
+
+  from dwave.system.samplers import DWaveSampler
 
   sampler = DWaveSampler()
   response = sampler.sample_ising(h, J)
@@ -176,6 +186,7 @@ Legacy Python Client
 .. code:: python
 
   from dwave_sapi2.core import solve_qubo
+
   answer = solve_qubo(solver, Q)
   answer = solve_qubo(solver, Q, param_name=value, ...)
 
@@ -183,6 +194,8 @@ Ocean Tools
 .........................
 
 .. code:: python
+
+  from dwave.system.samplers import DWaveSampler
 
   sampler = DWaveSampler()
   response = sampler.sample_qubo (h, J)
@@ -201,6 +214,7 @@ Legacy Python Client
 .. code:: python
 
   from dwave_sapi2.core import async_solve_ising
+
   submitted_problem = async_solve_ising(solver, h, J)
   submitted_problem = async_solve_ising(solver, h, J, param_name=value, ...)
 
@@ -210,6 +224,11 @@ Ocean Tools
 
 .. code:: python
 
+  from dwave.cloud import Client
+
+  url = 'system-url'
+  token = 'your-api-token'
+  client = Client(endpoint=url, token=token)
   solver = client.get_solver ("name")
   future = solver.sample_ising(h, J)
   future = solver.sample_ising(h, J, param_name=value, …)
@@ -223,7 +242,7 @@ Class Reference:
 
 
 Solve a QUBO Problem (Asynchronous)
-----------------------------------
+-----------------------------------------
 
 Legacy Python Client
 .........................
@@ -231,6 +250,7 @@ Legacy Python Client
 .. code:: python
 
   from dwave_sapi2.core import async_solve_qubo, await_completion
+
   submitted_problem = async_solve_qubo(solver, Q)
   submitted_problem = async_solve_qubo(solver, Q, param_name=value, ...)
 
@@ -240,6 +260,11 @@ Ocean Tools
 
 .. code:: python
 
+  from dwave.cloud import Client
+
+  url = 'system-url'
+  token = 'your-api-token'
+  client = Client(endpoint=url, token=token)
   solver = client.get_solver ("name")
   future = solver.sample_qubo(h, J)
   future = solver.sample_qubo (h, J, param_name=value, …)
@@ -259,6 +284,7 @@ Legacy Python Client
 .. code:: python
 
   from dwave_sapi2.core import await_completion
+
   done = await_completion(submitted_problems, min_done, timeout)
 
 
@@ -267,6 +293,11 @@ Ocean Tools
 
 .. code:: python
 
+  from dwave.cloud import Client
+
+  url = 'system-url'
+  token = 'your-api-token'
+  client = Client(endpoint=url, token=token)
   solver = client.get_solver ("name")
   future = solver.sample_ising(h, J)
   future.wait(timeout = timeout)
@@ -278,7 +309,7 @@ Class Reference:
 <https://docs.ocean.dwavesys.com/projects/cloud-client/en/latest/reference/computation.html#dwave.cloud.computation.Future>`_
 
 Embedding
-=================
+===============================
 
 Find Embedding
 --------------------
@@ -289,6 +320,7 @@ Legacy Python Client
 .. code:: python
 
   from dwave_sapi2.embedding import find_embedding
+
   embeddings = find_embedding(S, A)
   embeddings = find_embedding(S, A, param_name=value, ...)
 
@@ -298,6 +330,7 @@ Ocean Tools
 .. code:: python
 
   from minorminer import find_embedding
+
   emb = find_embedding(S, A)
 
 
@@ -315,6 +348,7 @@ Legacy Python Client
 .. code:: python
 
   from dwave_sapi2.embedding import embed_problem
+
   [h0, j0, jc, embeddings] = embed_problem(h, j, embeddings, adj, clean, smear, h_range, j_range)
 
 Ocean Tools
@@ -323,6 +357,7 @@ Ocean Tools
 .. code:: python
 
   from dwave.embedding import embed_ising
+
   th, tJ = embed_ising(h, J, embedding, target)
 
 
@@ -346,6 +381,7 @@ Legacy Python Client
 .. code:: python
 
   from dwave_sapi2.embedding import unembed_answer
+
   result = unembed_answer(solutions, embeddings, broken_chains=None, h=None, j=None)
 
 
@@ -355,6 +391,7 @@ Ocean Tools
 .. code:: python
 
   from dwave.embedding import unembed_sampleset
+
   samples = unembed_sampleset(embedded, embedding, bqm)
 
 
@@ -366,7 +403,7 @@ Function Reference:
 <https://docs.ocean.dwavesys.com/projects/system/en/latest/reference/generated/dwave.embedding.unembed_sampleset.html#dwave.embedding.unembed_sampleset>`_
 
 Utilities
-======================
+===============================
 
 Convert Ising to QUBO
 ----------------------------
@@ -377,6 +414,7 @@ Legacy Python Client
 .. code:: python
 
   from dwave_sapi2.util import ising_to_qubo
+
   (Q, qubo_offset) = ising_to_qubo(h, J)
 
 
@@ -386,6 +424,7 @@ Ocean Tools
 .. code:: python
 
   from dimod import ising_to_qubo
+
   (Q, qubo_offset) = ising_to_qubo(h, J)
 
 
@@ -396,6 +435,7 @@ except to output the results; for example:
 .. code:: python
 
   from dimod import BinaryQuadraticModel as BQM
+
   bqm = BQM.from_qubo(h, j, offset)
   qubo = bqm.to_ising()
 
@@ -415,6 +455,7 @@ Legacy Python Client
 .. code:: python
 
   from dwave_sapi2.util import qubo_to_ising
+
   (h, J, ising_offset) = qubo_to_ising(Q)
 
 
@@ -424,6 +465,7 @@ Ocean Tools
 .. code:: python
 
   from dimod import qubo_to_ising
+
   (h, J, ising_offset) = qubo_to_ising(Q)
 
 Best practice for Ocean tools is to use the ``bqm`` object, which is an abstraction
@@ -433,6 +475,7 @@ Ising and QUBO formats except to output the results; for example:
 .. code:: python
 
   from dimod import BinaryQuadraticModel as BQM
+
   bqm = BQM.from_qubo(h, j, offset)
   qubo = bqm.to_ising()
 
@@ -451,6 +494,7 @@ Legacy Python Client
 .. code:: python
 
   from dwave_sapi2.util import get_chimera_adjacency
+
   A = get_chimera_adjacency(m, n, t)
 
 
@@ -460,6 +504,7 @@ Ocean Tools
 .. code:: python
 
   from dwave_networkx import chimera_graph
+
   G = chimera_graph(m, n, t)
   dict(G.adjacency())
   chimera_graph(m, n=None, t=None, create_using=None, node_list=None, edge_list=None, data=True, coordinates=False)
@@ -479,6 +524,7 @@ Legacy Python Client
 .. code:: python
 
   from dwave_sapi2.util import get_hardware_adjacency
+
   A = get_hardware_adjacency(solver)
 
 Ocean Tools
@@ -487,6 +533,7 @@ Ocean Tools
 .. code:: python
 
   from dwave.system.samplers import DWaveSampler
+
   sampler = DWaveSampler(endpoint = url, token = token, proxy = proxy)
   A = sampler.adjacency
 
@@ -508,6 +555,7 @@ Legacy Python Client
 .. code:: python
 
   from dwave_sapi2.util import linear_index_to_chimera
+
   ind = linear_index_to_chimera(linear_index, m, n, t)
 
 Ocean Tools
@@ -516,6 +564,7 @@ Ocean Tools
 .. code:: python
 
   from dwave_networkx import linear_to_chimera
+
   ind = linear_to_chimera(r, m, n=None, t=None)
 
 
@@ -528,6 +577,7 @@ Legacy Python Client
 .. code:: python
 
   from dwave_sapi2.util import chimera_to_linear_index
+
   ind = chimera_to_linear_index(i, j, u, k, m, n, t)
 
 Ocean Tools
@@ -536,6 +586,7 @@ Ocean Tools
 .. code:: python
 
   from dwave_networkx import chimera_to_linear
+
   ind = chimera_to_linear(i, j, u, k, m, n, t)
 
 Reduce Degree
@@ -547,6 +598,7 @@ Legacy Python Client
 .. code:: python
 
   from dwave_sapi2.util import reduce_degree
+
   (new_terms, vars_rep) = reduce_degree(terms)
 
 
@@ -556,6 +608,7 @@ Ocean Tools
 .. code:: python
 
   from dimod import make_quadratic
+
   poly = {(0,): -1, (1,): 1, (2,): 1.5, (0, 1): -1, (0, 1, 2): -2}
   bqm = make_quadratic(poly, 5.0, dimod.SPIN)
 
@@ -574,6 +627,7 @@ Legacy Python Client
 .. code:: python
 
   from dwave_sapi2.util import make_quadratic
+
   (Q, new_terms, vars_rep) = make_quadratic(f, penalty_weight=None)
 
 Ocean Tools
@@ -582,6 +636,7 @@ Ocean Tools
 .. code:: python
 
   from dimod import make_quadratic
+
   poly = {(0,): -1, (1,): 1, (2,): 1.5, (0, 1): -1, (0, 1, 2): -2}
   bqm = make_quadratic(poly, 5.0, dimod.SPIN)
 
@@ -600,6 +655,7 @@ Legacy Python Client
 .. code:: python
 
   from dwave_sapi2.fix_variables import fix_variables
+
   result = fix_variables(q, method="optimized")
 
 Ocean Tools
@@ -609,6 +665,7 @@ Ocean Tools
 
   from dimod import fix_variables, BinaryQuadraticModel as BQM
   import dimod
+
   bqm = BQM.from_ising(h, J, offset)
   fixed_dict = dimod.fix_variables(bqm)
 
@@ -620,14 +677,73 @@ Function Reference:
 
 `fix_variables(bqm, sampling_mode=True) <https://docs.ocean.dwavesys.com/projects/dimod/en/latest/reference/bqm/generated/dimod.roof_duality.fix_variables.html?highlight=fix_variables#dimod.roof_duality.fix_variables>`_
 
+Other Tools
+===============================
+
+qbsolv
+-----------------
+
+``qbsolv``'s functionality can be replaced using the more general ``dwave-hybrid`` framework, however `qbsolv <https://docs.ocean.dwavesys.com/projects/qbsolv/en/latest/index.html#qbsolv>`_ itself has also been made available in Ocean.
+Read more about `D-Wave Hybrid <https://docs.ocean.dwavesys.com/projects/hybrid/en/stable/>`_.
+
+Ocean Tools
+.........................
+
+.. code:: python
+
+  from dwave_qbsolv import QBSolv
+
+  Q = {(0, 0): 1, (1, 1): 1, (0, 1): 1}
+  response = QBSolv().sample_qubo(Q)
+
 QSage
-==========
+-----------------
 
 Currently, there is no equivalent QSage functionality in Ocean tool suite.
 This `Leap Community post <https://support.dwavesys.com/hc/en-us/community/posts/360026065734-QSage>`_ discusses the topic.
 
-qbsolv
-=============
+Matlab
+-----------------
 
-The ``qbsolv`` utility has been replaced with the ``dwave-hybrid`` framework in Ocean
-(it is possible to build a ``qbsolv`` replica with Ocean). Read more about `D-Wave Hybrid <https://docs.ocean.dwavesys.com/projects/hybrid/en/stable/>`_.
+Although the Legacy ``Matlab`` Client is no longer available, it is still possible to integrate Matlab with Ocean, using
+the integration between ``Matlab`` and Python.
+
+Ocean Tools
+.........................
+
+Python Example
+
+.. code:: python
+
+  from dwave.system.samplers import DWaveSampler
+  from dwave.system.composites import EmbeddingComposite
+  from dimod import BinaryQuadraticModel
+  from numpy import array, int32
+
+  my_sampler = EmbeddingComposite(DWaveSampler(num_reads=2))
+
+  ndarr = array([[-88, 60, -20],
+                 [120, -58, 20],
+                 [20, -80, 28]], int32)
+
+  bqm = BinaryQuadraticModel.from_numpy_matrix(ndarr)
+
+  sampleset = my_sampler.sample(bqm, num_reads=2)
+
+Matlab Equivalent
+
+.. code:: matlab
+
+  samplers = py.importlib.import_module('dwave.system.samplers')
+  composites = py.importlib.import_module('dwave.system.composites')
+  dimod = py.importlib.import_module('dimod')
+
+  sampler = composites.EmbeddingComposite(samplers.DWaveSampler())
+
+  Q = [-88 60 -20;
+       120 -58 20;
+       20 -80 28];
+
+  bqm = dimod.BQM.from_numpy_matrix(Q)
+
+  sampleset = sampler.sample(bqm, pyargs('num_reads', int32(2)))
